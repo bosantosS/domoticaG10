@@ -7,11 +7,8 @@ import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 class LigthsTab extends StatefulWidget {
   //const LigthsTab({Key key}) : super(key: key);
-
-  bool connection = false;
-  BluetoothConnection connectionBT;
-
-  LigthsTab({this.connection,this.connectionBT});
+  final Function buttonHandler;
+  LigthsTab(this.buttonHandler);
 
   @override
   _LigthsTabState createState() => _LigthsTabState();
@@ -41,27 +38,6 @@ class _LigthsTabState extends State<LigthsTab> {
     );
   }
 
-  void _sendMessage(String text) async {
-    text = text.trim();
-    
-
-    if (text.length > 0) {
-      try {
-        widget.connectionBT.output.add(utf8.encode(text + "\r\n"));
-        await widget.connectionBT.output.allSent;
-
-        setState(() {
-          
-        });
-
-      } catch (e) {
-        // Ignore error, but notify state
-        setState(() {});
-      }
-    }
-  }
-
-
   ListView _createRooms() {
   return ListView.builder(
     itemCount: rooms.length,
@@ -77,7 +53,8 @@ class _LigthsTabState extends State<LigthsTab> {
                 rooms[ind].turnOn = value;
                 print(value);
                 print(rooms[ind].turnOnOff());
-                widget.connection ? () => _sendMessage(rooms[ind].turnOnOff()) : null;
+                widget.buttonHandler(rooms[ind].turnOnOff());
+                //isConnected ? () => _sendMessage('1') : null,
               });
            }, 
         ),

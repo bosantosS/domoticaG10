@@ -163,9 +163,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    
-    var isConnection = isConnected;
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -184,8 +181,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: TabBarView(
           children: <Widget>[
-            
-            LigthsTab(connection: isConnection,connectionBT: connection),
+            LigthsTab(_sendMessage),
             GarageTab(),
           ],
         ),
