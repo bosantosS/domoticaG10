@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class GarageTab extends StatefulWidget {
-  const GarageTab({Key key}) : super(key: key);
+  //const GarageTab({Key key}) : super(key: key);
+  final Function buttonHandler;
+  GarageTab(this.buttonHandler);
 
   @override
   _GarageTabState createState() => _GarageTabState();
@@ -45,6 +47,7 @@ class _GarageTabState extends State<GarageTab> {
                     setState(() {
                       isOpen = !isOpen;
                       print(isOpen);
+                      widget.buttonHandler(isOpen ? 'm' : 'n');
                     });
                   },
                 ),

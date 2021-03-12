@@ -111,8 +111,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-
-
   @override
   void initState() {
     super.initState();
@@ -182,7 +180,7 @@ class _HomePageState extends State<HomePage> {
         body: TabBarView(
           children: <Widget>[
             LigthsTab(_sendMessage),
-            GarageTab(),
+            GarageTab(_sendMessage),
           ],
         ),
         floatingActionButton: FloatingActionButton(
